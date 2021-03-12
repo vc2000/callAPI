@@ -1,0 +1,18 @@
+server:
+  port: 8080
+api:
+  key: 42a71c65eb858ea2147b9b4b7a990fe7
+#feign:
+#  client:
+#    config:
+#      MoviesFeignClient:
+#        connectTimeout: 5000
+#        readTimeout: 30000
+#      default:
+#        loggerLevel: basic
+integration:
+  web-movie-api:
+    base-url: https://api.themoviedb.org/3/movie/
+    connection-timeout: 5000
+    pool-size: 10
+    read-timeout: 10000
