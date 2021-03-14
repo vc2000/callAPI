@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,22 +24,23 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+@EnableFeignClients(basePackages = {"com.learn.movie.movies.service"})
 public class MoviesApplication {
 
-	@Bean( name = "movieRestTemplate")
-	public RestTemplate restTemplate() {
-		RestTemplate restTemplate = new RestTemplate();
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.setSupportedMediaTypes(Arrays.asList(MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON));
-		ObjectMapper objectMapper = new ObjectMapper()
-				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-				.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-		converter.setObjectMapper(objectMapper);
-
-		restTemplate.getMessageConverters().add(converter);
-
-		return restTemplate;
-	}
+//	@Bean( name = "movieRestTemplate")
+//	public RestTemplate restTemplate() {
+//		RestTemplate restTemplate = new RestTemplate();
+//		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//		converter.setSupportedMediaTypes(Arrays.asList(MediaType.TEXT_PLAIN, MediaType.APPLICATION_JSON));
+//		ObjectMapper objectMapper = new ObjectMapper()
+//				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+//				.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+//		converter.setObjectMapper(objectMapper);
+//
+//		restTemplate.getMessageConverters().add(converter);
+//
+//		return restTemplate;
+//	}
 	public static void main(String[] args) {
 
 
